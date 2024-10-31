@@ -15,16 +15,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/home").permitAll()
-                        .requestMatchers("/musicas").permitAll()
+                        .requestMatchers("/musicas/**").permitAll()
                         .requestMatchers("/notas").permitAll()
                         .requestMatchers("/dicionario").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers("/css/**", "/js/**", "/images/**", "/style.css").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/js/**", "/images/**", "/style.css").permitAll()
+
                 )
                 .formLogin(form -> form
                         .defaultSuccessUrl("/", true)

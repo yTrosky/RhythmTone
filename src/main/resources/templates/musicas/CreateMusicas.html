@@ -14,7 +14,9 @@
         <div class="col-md-8 mx-auto rounded border p-4 m-4">
             <h2 class="text-center mb-5">New Musicas</h2>
 
-            <form method="post" enctype="multipart/form-data" th:object="${musicasDto}">
+            <form method="post" enctype="multipart/form-data" th:object="${musicasDto}" th:action="@{/musicas/create}">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> <!-- Token CSRF -->
+
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label">Name</label>
                     <div class="col-sm-8">
